@@ -1,0 +1,6 @@
+# Flask
+# Flask-WTF
+pymongo
+fastapi
+uvicorn[standard]
+opentelemetry-instrumentation-fastapi
