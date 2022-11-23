@@ -100,5 +100,5 @@ The terraform code creates a simple dashboard on Cloud Watch with cpu and memory
 ## Further improvements
 - Create VPC and subnets
 - [Use Internet gateway](https://engineering.finleap.com/posts/2020-02-20-ecs-fargate-terraform/)
-- Create pipeline to build image, push to ecr and update task definition
+- Create [pipeline](https://engineering.finleap.com/posts/2020-02-20-ecs-fargate-terraform/) to build image, push to ecr and update task definition
 - Enable tracing with AWS Distro for OpenTelemetry
