@@ -2,17 +2,23 @@ from fastapi import FastAPI, Response
 from models import User
 # from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from pymongo import MongoClient
+import os
 
-# config system
-client = MongoClient('localhost:27017')
+mondogdb_url = os.getenv('MONGODB_URL', 'localhost:27017')
+client = MongoClient(mondogdb_url)
 db = client.myapp
 
 app = FastAPI()
 
 
-@app.get("/health")
-def read_health():
-    return {"status": "ok"}
+@app.get("/")
+def read_health(response: Response):
+    try:
+        client.server_info()
+        return {"status": "ok"}
+    except Exception:
+        response.status_code = 500
+        return {"status": "Failed to connect to database."}
 
 
 @app.get("/users/{user_id}")

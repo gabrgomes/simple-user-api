@@ -1,6 +1,10 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get install -y python3 python3-pip
-COPY requirements.txt /tmp/requirements.txt
-RUN pip3 install -r /tmp/requirements.txt
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
 COPY ./app /app
-entrypoint ['python3', '/app/run.py']
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

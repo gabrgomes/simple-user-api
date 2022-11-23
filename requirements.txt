@@ -1,6 +1,4 @@
-# Flask
-# Flask-WTF
-pymongo
-fastapi
-uvicorn[standard]
-opentelemetry-instrumentation-fastapi
+pymongo==4.3.3
+fastapi==0.87.0
+uvicorn[standard]==0.20.0
+# opentelemetry-instrumentation-fastapi==0.35b0
