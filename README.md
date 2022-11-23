@@ -90,3 +90,5 @@ The terraform code creates a simple dashboard on Cloud Watch with cpu and memory
 - [x] Deploy AWS
 - [x] HA
 - [x] Monitoring
+- [ ] Autoscaling
+  
