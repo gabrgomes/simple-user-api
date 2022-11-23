@@ -29,6 +29,9 @@ Requirements:
 - docker >= 20.10.18
   
 ```shell
+# Building the app
+docker compose build 
+
 # run containers on background
 docker compose up -d
 
