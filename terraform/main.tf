@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 resource "aws_ecs_cluster" "app-cluster" {
-  name = var.app_name
+  name = "${var.app_name}-app"
 }
 
 resource "aws_ecs_task_definition" "app-task" {

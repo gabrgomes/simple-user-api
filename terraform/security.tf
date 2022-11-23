@@ -20,6 +20,23 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+# Security group Web > LB
+resource "aws_security_group" "load_balancer_security_group" {
+  ingress {
+    from_port   = 80 # Allowing traffic in from port 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic in from all sources
+  }
+
+  egress {
+    from_port   = 0 # Allowing any incoming port
+    to_port     = 0 # Allowing any outgoing port
+    protocol    = "-1" # Allowing any outgoing protocol 
+    cidr_blocks = ["0.0.0.0/0"] # Allowing traffic out to all IP addresses
+  }
+}
+
 # Security group LB > App 
 resource "aws_security_group" "app_service_security_group" {
   ingress {
