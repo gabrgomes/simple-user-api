@@ -40,7 +40,7 @@ docker compose down
 
 ## Running on AWS
 Requirements:
-- aws credentials configured [ref](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration)
+- aws credentials configured ([ref](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration))
 - terraform >= 1.3.2
 
 ```shell
