@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "app-task" {
       "essential": true,
       "portMappings": [
         {
-          "containerPort": 8000,
-          "hostPort": 8000
+          "containerPort": ${var.app_container_port},
+          "hostPort": ${var.app_container_port}
         }
       ],
       "memory": 512,
@@ -49,22 +49,26 @@ resource "aws_ecs_task_definition" "app-task" {
 }
 
 resource "aws_ecs_service" "app-service" {
-  name            = "app-service"                             # Naming our service
-  cluster         = "${aws_ecs_cluster.app-cluster.id}"             # Referencing our created Cluster
-  task_definition = "${aws_ecs_task_definition.app-task.arn}" # Referencing the task our service will spin up
+  name            = "app-service"
+  cluster         = "${aws_ecs_cluster.app-cluster.id}"
+  task_definition = "${aws_ecs_task_definition.app-task.arn}"
   launch_type     = "FARGATE"
-  desired_count   = 3 # Setting the number of containers we want deployed to 3
+  desired_count   = 1 
 
   network_configuration {
     subnets          = ["${aws_default_subnet.default_subnet_a.id}", "${aws_default_subnet.default_subnet_b.id}", "${aws_default_subnet.default_subnet_c.id}"]
     assign_public_ip = true # Providing our containers with public IPs
-    security_groups  = ["${aws_security_group.app_service_security_group.id}"] # Setting the security group
+    security_groups  = ["${aws_security_group.app_service_security_group.id}"]
   }
 
   load_balancer {
-    target_group_arn = "${aws_lb_target_group.target_group.arn}" # Referencing our target group
+    target_group_arn = "${aws_lb_target_group.target_group.arn}"
     container_name   = "${aws_ecs_task_definition.app-task.family}"
-    container_port   = 8000 # Specifying the container port
+    container_port   = var.app_container_port
+  }
+
+  lifecycle {
+    ignore_changes = [task_definition, desired_count]
   }
 
 }

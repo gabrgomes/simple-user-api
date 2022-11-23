@@ -68,7 +68,12 @@ terraform destroy
 | region_name  | us-east-1  | AWS region name  |
 |  app_name |  simple-user-api |  Name of the application to be used to create resources. |
 |  app_image | public.ecr.aws/f9q5q0t9/simple-user-api:latest  | Application image url |
+|  app_container_port |  8000 | Application port |
 |  db_container_port |  27017 | MongoDB port |
+|  max_capacity |  3 | Maximum number of application tasks |
+|  min_capacity |  1 | Minimum number of application tasks |
+|  cpu_threshold |  80 | Cpu % threshold for autoscaling |
+|  mem_threshold |  80 | Memory % threshold for autoscaling |
 
 ### Considerations
 For simplicity this project has some questionable choices that should be mentioned:
@@ -90,5 +95,10 @@ The terraform code creates a simple dashboard on Cloud Watch with cpu and memory
 - [x] Deploy AWS
 - [x] HA
 - [x] Monitoring
-- [ ] Autoscaling
+- [x] Autoscaling
   
+## Further improvements
+- Create VPC and subnets
+- [Use Internet gateway](https://engineering.finleap.com/posts/2020-02-20-ecs-fargate-terraform/)
+- Create pipeline to build image, push to ecr and update task definition
+- Enable tracing with AWS Distro for OpenTelemetry
