@@ -75,3 +75,7 @@ For simplicity this project has some questionable choices that should be mention
 - The terraform module provision all resources on the default VPC.
 - The database is implemented as simple MongoDB instance without authentication and persistence.
 - The containers in ECS are configured with public IP adresses to allow image pull from public repositories. Ideally you could use private repos on ECR with the necessary security group configurations or use NAT for outgoing connections to the internet.
+
+
+## Monitoring 
+![image](https://user-images.githubusercontent.com/8647236/203460099-c0187f4f-a0b8-4f28-975d-9f1b370aeb35.png)
